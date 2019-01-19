@@ -100,3 +100,5 @@ ENV/
 
 #Misc
 data_files/
+
+.coverage
