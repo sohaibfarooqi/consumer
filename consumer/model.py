@@ -3,12 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, create_engine, UniqueConstraint, func
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine(os.environ.get('DATABASE_URI'), echo=True)
 Base = declarative_base()
-
-Session = sessionmaker()
-Session.configure(bind=engine)
-session = Session()
 
 class User(Base):
   """
