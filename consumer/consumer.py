@@ -30,7 +30,7 @@ class Consumer(celery_app.Task):
     datatypes are correct. The validated data will then be loaded
     into database table.
 
-    Raises:
+    Handles:
     -------
       - marshmallow.ValidationError: In case of wrong datatypes.
       - sqlalchemy.exc.IntegrityError: In case of duplicate email
