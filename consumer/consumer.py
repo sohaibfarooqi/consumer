@@ -1,11 +1,14 @@
+import os
 from celery import Celery
 from celery.utils.log import get_task_logger
 from marshmallow import ValidationError
 from sqlalchemy import exc
+from sqlalchemy import create_engine, func
+from sqlalchemy.orm import sessionmaker
 
 from .config import CeleryConfig
 from .schema import UserSchema
-from .model import User, session
+from .model import User
 
 celery_app = Celery("consumer")
 celery_app.config_from_object(CeleryConfig)
@@ -41,6 +44,12 @@ class Consumer(celery_app.Task):
       user = UserSchema()
       user_obj = user.load(kwargs)
       user_model = User(**user_obj)
+
+      engine = create_engine(os.environ.get('DATABASE_URI'), echo=True)
+      Session = sessionmaker()
+      Session.configure(bind=engine)
+      session = Session()
+
       session.add(user_model)
       session.commit()
 
@@ -50,5 +59,10 @@ class Consumer(celery_app.Task):
     except exc.IntegrityError as ierr:
       logger.error('Unique constraint violation for email: {}'.format(kwargs.get('email')))
       session.rollback()
+
+    session.close()
+    engine.dispose()
+
+    return self.request.id
 
 celery_app.tasks.register(Consumer())
