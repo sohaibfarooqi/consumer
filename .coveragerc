@@ -1,0 +1,5 @@
+[run]
+branch = True
+omit = *alembic*,
+       *test*,
+       *__init__*
