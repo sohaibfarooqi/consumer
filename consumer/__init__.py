@@ -1,1 +1,1 @@
-from .consumer import celery_app
+from .consumer import celery_app, Consumer
