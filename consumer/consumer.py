@@ -3,7 +3,7 @@ import os
 from celery import Celery
 from celery.utils.log import get_task_logger
 from marshmallow import ValidationError
-from sqlalchemy import create_engine, exc, func
+from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import sessionmaker
 
 from .config import CeleryConfig

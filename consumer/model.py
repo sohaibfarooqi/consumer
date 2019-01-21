@@ -1,8 +1,7 @@
 import os
 
-from sqlalchemy import Column, DateTime, Integer, String, UniqueConstraint, create_engine, func
+from sqlalchemy import Column, DateTime, Integer, String, UniqueConstraint, func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
