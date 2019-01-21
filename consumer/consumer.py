@@ -41,15 +41,14 @@ class Consumer(celery_app.Task):
 
         """
         try:
-
-            user = UserSchema()
-            user_obj = user.load(kwargs)
-            user_model = User(**user_obj)
-
             engine = create_engine(os.environ.get('DATABASE_URI'), echo=True)
             Session = sessionmaker()
             Session.configure(bind=engine)
             session = Session()
+
+            user = UserSchema()
+            user_obj = user.load(kwargs)
+            user_model = User(**user_obj)
 
             session.add(user_model)
             session.commit()
