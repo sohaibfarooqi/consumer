@@ -45,5 +45,5 @@ Follow these commands to run tests and generate coverage reports
 Github pre-commit hooks can be ver useful to automate things like code formating, running linters and checking
 for missing migrations. Use following commands to enable them:
 
-  - Run `pip pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
+  - Run `pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
   - Run `git commit -m "Your message" -n` to skip the hook if you need.
